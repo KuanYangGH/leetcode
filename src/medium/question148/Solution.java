@@ -1,7 +1,5 @@
 package medium.question148;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *  Sort List
@@ -18,7 +16,7 @@ public class Solution {
         ListNode next;
         ListNode(int x) { val = x; }
     }
-    public ListNode sortList(ListNode head) {
+    /*public ListNode sortList(ListNode head) {
         if(head==null){
             return head;
         }
@@ -65,7 +63,61 @@ public class Solution {
         for(int k=0;k<tmp.size();k++){
             list.set(k+startIndex,tmp.get(k));
         }
+    }*/
+
+    public ListNode sortList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode mid = findMidNode(head);
+        return merge(sortList(head),sortList(mid));
     }
+    private ListNode merge(ListNode head,ListNode mid){
+        if(head==null){
+            return mid;
+        }
+        if(mid==null){
+            return head;
+        }
+        ListNode current = new ListNode(0);
+        ListNode tmp = current;
+        while (head!=null&&mid!=null){
+            if(head.val<mid.val){
+                tmp.next = head;
+                head = head.next;
+            }
+            else {
+                tmp.next = mid;
+                mid = mid.next;
+            }
+            tmp = tmp.next;
+        }
+        while (head!=null){
+            tmp.next = head;
+            head = head.next;
+            tmp = tmp.next;
+        }
+        while (mid!=null){
+            tmp.next = mid;
+            mid = mid.next;
+            tmp = tmp.next;
+        }
+        return current.next;
+    }
+
+    private ListNode findMidNode(ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast!=null&&fast.next!=null&&fast.next.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        ListNode midNode = slow.next;
+        //break the list in the middle position
+        slow.next = null;
+        return midNode;
+    }
+
 
     public void test(){
         ListNode head = new ListNode(4);
