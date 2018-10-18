@@ -18,9 +18,9 @@ public class Solution {
           TreeNode(int x) { val = x; }
      }
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-          if(preorder==null||preorder.length==0){
-              return null;
-          }
+        if(preorder==null||preorder.length==0){
+          return null;
+        }
         return buildTree(preorder,inorder,0,preorder.length-1,0,inorder.length-1);
     }
 
