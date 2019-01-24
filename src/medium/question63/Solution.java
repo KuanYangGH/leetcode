@@ -11,7 +11,6 @@ package medium.question63;
 public class Solution {
     /**
      * 使用递归的方法不好，会出现大量重复计算
-     *
      * @param obstacleGrid
      * @return
      */
@@ -81,8 +80,42 @@ public class Solution {
         return bp[0][0];
     }
 
+    /**
+     * 使用BP算法,并进行代码优化,但实际运行速度没有代码优化前快
+     * @param obstacleGrid
+     * @return
+     */
+    public int uniquePathsWithObstaclesWithOptimization(int[][] obstacleGrid) {
+        if (obstacleGrid == null || obstacleGrid.length == 0) {
+            return 0;
+        }
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+        int[][] bp = new int[m][n];
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+
+                if(obstacleGrid[i][j]!=1&&i==m-1&&j==n-1){
+                    bp[i][j] = 1;
+                }
+                //初始化最后一行
+                else if(obstacleGrid[i][j]!=1&&i==m-1){
+                    bp[i][j]=bp[i][j+1];
+                }
+                //初始化最后一列
+                else if(obstacleGrid[i][j]!=1&&j==n-1){
+                    bp[i][j] = bp[i+1][j];
+                }
+                else if(obstacleGrid[i][j]!=1){
+                    bp[i][j] = bp[i][j+1]+bp[i+1][j];
+                }
+            }
+        }
+        return bp[0][0];
+    }
+
     public static void main(String[] args) {
         int[][] obstacleGrid = {{0,0,0},{0,0,0},{0,0,0}};
-        System.out.println(new Solution().uniquePathsWithObstacles(obstacleGrid));
+        System.out.println(new Solution().uniquePathsWithObstaclesWithOptimization(obstacleGrid));
     }
 }
