@@ -13,7 +13,7 @@ public class Solution {
         int[][] matrix = new int[n][n];
         int cnt = 1;
         int index = 0;
-        while (index <= n / 2) {
+        while (index < n / 2) {
             int i = index, j = index;
             //left to right
             for (; j < n - 1 - index; j++) matrix[i][j] = cnt++;
@@ -32,7 +32,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[][] matrix = new Solution().generateMatrix(-1);
+        int[][] matrix = new Solution().generateMatrix(4);
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + " ");
