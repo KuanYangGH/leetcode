@@ -11,6 +11,7 @@ package medium.question63;
 public class Solution {
     /**
      * 使用递归的方法不好，会出现大量重复计算
+     *
      * @param obstacleGrid
      * @return
      */
@@ -53,27 +54,25 @@ public class Solution {
         int n = obstacleGrid[0].length;
         int[][] bp = new int[m][n];
         // 初始化最后一列
-        for(int i=m-1;i>=0;i--){
-            if(obstacleGrid[i][n-1]!=1&&i==m-1){
-                bp[i][n-1] = 1;
-            }
-            else if(obstacleGrid[i][n-1]!=1){
-                bp[i][n-1] = bp[i+1][n-1];
+        for (int i = m - 1; i >= 0; i--) {
+            if (obstacleGrid[i][n - 1] != 1 && i == m - 1) {
+                bp[i][n - 1] = 1;
+            } else if (obstacleGrid[i][n - 1] != 1) {
+                bp[i][n - 1] = bp[i + 1][n - 1];
             }
         }
         //初始化最后一行
-        for(int j =n-1;j>=0;j--){
-            if(obstacleGrid[m-1][j]!=1&&j==n-1){
-                bp[m-1][j]=1;
-            }
-            else if(obstacleGrid[m-1][j]!=1){
-                bp[m-1][j]=bp[m-1][j+1];
+        for (int j = n - 1; j >= 0; j--) {
+            if (obstacleGrid[m - 1][j] != 1 && j == n - 1) {
+                bp[m - 1][j] = 1;
+            } else if (obstacleGrid[m - 1][j] != 1) {
+                bp[m - 1][j] = bp[m - 1][j + 1];
             }
         }
         for (int i = m - 2; i >= 0; i--) {
             for (int j = n - 2; j >= 0; j--) {
-                if(obstacleGrid[i][j]!=1){
-                    bp[i][j] = bp[i][j+1]+bp[i+1][j];
+                if (obstacleGrid[i][j] != 1) {
+                    bp[i][j] = bp[i][j + 1] + bp[i + 1][j];
                 }
             }
         }
@@ -81,7 +80,8 @@ public class Solution {
     }
 
     /**
-     * 使用BP算法,并进行代码优化,但实际运行速度没有代码优化前快
+     * 使用BP算法,并进行代码优化
+     *
      * @param obstacleGrid
      * @return
      */
@@ -94,20 +94,20 @@ public class Solution {
         int[][] bp = new int[m][n];
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
-
-                if(obstacleGrid[i][j]!=1&&i==m-1&&j==n-1){
-                    bp[i][j] = 1;
-                }
-                //初始化最后一行
-                else if(obstacleGrid[i][j]!=1&&i==m-1){
-                    bp[i][j]=bp[i][j+1];
-                }
-                //初始化最后一列
-                else if(obstacleGrid[i][j]!=1&&j==n-1){
-                    bp[i][j] = bp[i+1][j];
-                }
-                else if(obstacleGrid[i][j]!=1){
-                    bp[i][j] = bp[i][j+1]+bp[i+1][j];
+                if (obstacleGrid[i][j] != 1) {
+                    if (i == m - 1 && j == n - 1) {
+                        bp[i][j] = 1;
+                    }
+                    //初始化最后一行
+                    else if (i == m - 1) {
+                        bp[i][j] = bp[i][j + 1];
+                    }
+                    //初始化最后一列
+                    else if (j == n - 1) {
+                        bp[i][j] = bp[i + 1][j];
+                    } else {
+                        bp[i][j] = bp[i][j + 1] + bp[i + 1][j];
+                    }
                 }
             }
         }
@@ -115,7 +115,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        int[][] obstacleGrid = {{0,0,0},{0,0,0},{0,0,0}};
+        int[][] obstacleGrid = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
         System.out.println(new Solution().uniquePathsWithObstaclesWithOptimization(obstacleGrid));
     }
 }
