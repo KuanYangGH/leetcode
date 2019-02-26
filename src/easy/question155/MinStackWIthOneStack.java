@@ -1,4 +1,7 @@
 package easy.question155;
+
+import java.util.Stack;
+
 /**
  * Min Stack
  * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
@@ -17,4 +20,48 @@ package easy.question155;
  * minStack.getMin();   --> Returns -2.
  */
 public class MinStackWIthOneStack {
+
+    Integer min = Integer.MAX_VALUE;
+    Stack<Integer> stack = null;
+
+    /** initialize your data structure here. */
+    public MinStackWIthOneStack() {
+        stack = new Stack<>();
+    }
+
+    public void push(int x) {
+        if(x<=min){
+            stack.push(min);
+            min = x;
+        }
+        stack.push(x);
+    }
+
+    public void pop() {
+        if(stack.pop().equals(min)) {
+            min=stack.pop();
+        }
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public static void main(String[] args) {
+        MinStackWIthOneStack ms = new MinStackWIthOneStack();
+        ms.push(512);
+        ms.push(-1024);
+        ms.push(-1024);
+        ms.push(512);
+        ms.pop();
+        int a=ms.getMin();
+        ms.pop();
+        int b = ms.getMin();
+        ms.pop();
+        int c = ms.getMin();
+    }
 }
