@@ -34,11 +34,12 @@
 1. Sort Colors    
 1. Subsets    
 1. Word Search    
-1. Largest Rectangle in Histogram    
-1. Binary Tree Inorder Traversal    
-1. Unique Binary Search Trees    
-1. Validate Binary Search Tree    
-1. Symmetric Tree    
+84. Largest Rectangle in Histogram    
+94. Binary Tree Inorder Traversal    
+96. Unique Binary Search Trees    
+98. Validate Binary Search Tree    
+101. Symmetric Tree   
+102. Symmetric Tree     
 1. Construct Binary Tree from Preorder and Inorder Traversal  
 1. Single Number      
 1. Sort List   

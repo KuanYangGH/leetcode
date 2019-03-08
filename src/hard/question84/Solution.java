@@ -1,6 +1,8 @@
 package hard.question84;
 
 
+import java.util.Stack;
+
 /**
  * Largest Rectangle in Histogram
  * Given n non-negative integers representing the histogram's bar height
@@ -71,9 +73,36 @@ public class Solution {
         return maxArea;
     }
 
+    /**
+     * 栈中下标对应的元素永远升序排列，
+     * 当出现降序元素时，那么当前栈顶的左右两边都是小于它的，就可以计算面积
+     *
+     * @param heights
+     * @return
+     */
+    public int largestRectangleAreaBasedStack(int[] heights) {
+        int len = heights.length;
+        // save the index of heights
+        Stack<Integer> stack = new Stack<>();
+        int area = 0;
+        for(int i=0;i<len;i++){
+            int h = (i==len)?0:heights[i];
+            if(stack.empty()||heights[stack.peek()]<=h){
+                stack.push(i);
+            }
+            else {
+                int index = stack.pop();
+                area = Math.max(area,(stack.empty()?i:(i-stack.peek()-1))*heights[index]);
+                i--;
+            }
+        }
+        return area;
+    }
+
     public static void main(String[] args) {
         int[] heights = {2,1,5,6,2,3};
         System.out.println(new Solution().largestRectangleArea(heights));
-        System.out.print(new Solution().largestRectangleAreaOn(heights));
+        System.out.println(new Solution().largestRectangleAreaOn(heights));
+        System.out.print(new Solution().largestRectangleAreaBasedStack(heights));
     }
 }
