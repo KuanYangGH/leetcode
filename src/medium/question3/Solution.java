@@ -34,7 +34,7 @@ public class Solution {
                 end = i;
                 map.put(characters[i], i);
             } else {
-                start = start>(map.get(characters[i]) + 1)?start:(map.get(characters[i]) + 1);
+                start = start > (map.get(characters[i]) + 1) ? start : (map.get(characters[i]) + 1);
                 end = i;
                 map.put(characters[i], i);
             }
@@ -43,8 +43,24 @@ public class Solution {
         return maxLen;
     }
 
+    public int lengthOfLongestSubstringSecondTime(String s) {
+        if (s == null || s.length() == 0) return 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int lengthOfLongest = 1;
+        int start = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if(map.containsKey(s.charAt(i))){
+                start = Math.max(start,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            lengthOfLongest = Math.max(lengthOfLongest,i-start+1);
+        }
+        return lengthOfLongest;
+    }
+
     public static void main(String[] args) {
         String s = "abba";
         System.out.println(new Solution().lengthOfLongestSubstring(s));
+        System.out.println(new Solution().lengthOfLongestSubstringSecondTime(s));
     }
 }
