@@ -1,5 +1,4 @@
 package medium.question43;
-
 /**
  * Multiply Strings
  * Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2,
@@ -21,6 +20,7 @@ public class Solution {
         if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
+
         StringBuilder r = new StringBuilder();
         for (int i = num1.length() - 1; i >= 0; i--) {
             StringBuilder s = new StringBuilder();
