@@ -1,8 +1,5 @@
 package hard.question42;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Trapping Rain Water
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,

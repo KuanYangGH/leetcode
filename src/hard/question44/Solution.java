@@ -72,12 +72,7 @@ public class Solution {
                 if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '?') {
                     matchMatrix[i][j] = matchMatrix[i - 1][j - 1];
                 } else if (p.charAt(j - 1) == '*') {
-                    matchMatrix[i][j] = false;
-                    for (int k = i; k >= 0; k--) {
-                        if (matchMatrix[k][j - 1]) {
-                            matchMatrix[i][j] = true;
-                        }
-                    }
+                    matchMatrix[i][j] = matchMatrix[i - 1][j] || matchMatrix[i][j - 1];
                 }
             }
         }
